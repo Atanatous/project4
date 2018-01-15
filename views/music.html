@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko-kr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="user-scalable=no" />
+    <title>Hard Project</title>
+    <link rel="stylesheet" type="text/css" href="css/styles.css" />
+    <link rel="stylesheet" type="text/css" href="css/menu.css" />
+    <link rel="stylesheet" type="text/css" href="css/music-play.css" />
+  </head>
+
+  <body>
+    <header>
+      <p class="main_title">
+        YEAAAHH
+      </p>
+      <p class="sub_title">
+        Fun with your music
+      </p>
+      <nav id="topMenu">
+        <ul>
+          <li class="topMenuLi">
+            <a class="menuLink" href="/"> Home </a>
+          </li>
+          <li>|</li>
+          <li class="topMenuLi">
+            <a class="menuLink" href="/sample"> Sample </a>
+          </li>
+          <li>|</li>
+          <li class="topMenuLi">
+            <a class="menuLink" href="/gallery"> Gallery </a>
+          </li>
+          <li>|</li>
+          <li class="topMenuLi">
+            <a class="menuLink" href="/music"> Music </a>
+          </li>
+          <li>|</li>
+        </ul>
+      </nav>
+    </header>
+
+    <form id="uploadForm"
+      enctype="multipart/form-data"
+      action="/audio"
+      method="post">
+      <label for="file-upload" class="custom-file-upload">
+        Upload MP3 File
+      </label>
+        <input id="file-upload" type="file" name="audio" />
+        <input class="button" type="submit" value="전송" name="upload" />
+    </form>
+
+    <div id="album-list">
+      <ul>
+        <li>
+          <div class="album-item">
+            <div class="album-info">
+              <p class="album-title">
+                앨범1
+              </p>
+              <p class="album-date">
+                2018.01.15
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li>
+          <div class="album-item">
+            <div class="album-info">
+              <p class="album-title">
+                앨범1
+              </p>
+              <p class="album-date">
+                2018.01.15
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li>
+          <div class="album-item">
+            <div class="album-info">
+              <p class="album-title">
+                앨범1
+              </p>
+              <p class="album-date">
+                2018.01.15
+              </p>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/wavesurfer.js/1.4.0/wavesurfer.min.js"></script>
+    <script src="components/music_list.js"></script>
+  </body>
+
+</html>
