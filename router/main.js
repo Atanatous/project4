@@ -1,13 +1,6 @@
-var mongoose  = require('mongoose');
-var Schema    = mongoose.Schema;
 var multer    = require('multer');
-
-var audioSchema = new Schema({
-  filename: String,
-  mimetype: String,
-  size: Number
-});
-var Audio = mongoose.model('audio', audioSchema);
+var ffmetadata = require('ffmetadata');
+var Audio = require('../models/audio');
 
 var storage = multer.diskStorage({
   destination: function(req, file, cb) {
@@ -39,20 +32,44 @@ module.exports = function(app, fs)
   })
 
   app.get('/music', function(req, res) {
-    res.render('music.html');
+    res.render('music-list.html');
+  })
+
+  app.get('/api/music', function(req, res) {
+    Audio.find((err, audios) => {
+      if (err) return res.status(500).send({ error: 'database failure' });
+      res.json(audios);
+    });
   })
 
   app.post('/audio', upload.single('audio'), function(req, res) {
-    var filename  = req.file.filename
+    if (req.file == null) {
+      res.send("There is no Upload File");
+    }
+    var filename  = req.file.filename;
     var mimetype  = req.file.mimetype;
     var size      = req.file.size;
+    var title     = "";
+    var artist    = "";
+    var lyrics    = "";
 
-    Audio.findOneAndUpdate(
-      { "filename": filename },
-      { "filename": filename, "mimetype": mimetype, "size": size},
-      { upsert: true },
-      (err) => { if (err) { console.error(err); res.json({ result: 0}); return; }});
+    var metadata  = ffmetadata.read(req.file.path, function(err, data) {
+      if (err) {
+        console.error("Error reading metadata", err);
+      } else {
+        console.log(data);
+        title = data.title;
+        artist = data.artist;
+        lyrics = data.lyrics;
 
-    res.redirect("/music");
+        Audio.findOneAndUpdate(
+          { "filename": filename, "artist": artist },
+          { "filename": filename, "title": title, "mimetype": mimetype, "lyrics": lyrics, "size": size},
+          { upsert: true },
+          (err) => { if (err) { console.error(err); res.json({ result: 0}); return; }});
+      }
+
+      res.redirect("/music");
+    });
   });
 }

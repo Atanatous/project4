@@ -6,7 +6,7 @@
     <title>Hard Project</title>
     <link rel="stylesheet" type="text/css" href="css/styles.css" />
     <link rel="stylesheet" type="text/css" href="css/menu.css" />
-    <link rel="stylesheet" type="text/css" href="css/music.css" />
+    <link rel="stylesheet" type="text/css" href="css/music-play.css" />
   </head>
 
   <body>
@@ -39,18 +39,15 @@
       </nav>
     </header>
 
-    <form id="uploadForm"
-      enctype="multipart/form-data"
-      action="/audio"
-      method="post">
-      <label for="file-upload" class="custom-file-upload">
-        Upload MP3 File
-      </label>
-        <input id="file-upload" type="file" name="audio" />
-        <input class="button" type="submit" value="전송" name="upload" />
-    </form>
-
     <div id="album-wrapper">
+      <section class="album-info">
+          <p>
+            <h1> 제목 </h1>
+          </p>
+          <p>
+            <h3> 가수 이름 </h3>
+          </p>
+      </section>
       <div class="image-wrapper">
         <img src="/image/lonely.jpg" />
       </div>

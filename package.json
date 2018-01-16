@@ -1,16 +1,17 @@
 {
   "name": "project4-express-server",
   "version": "1.0.0",
+  "license": "KAIST",
   "dependencies": {
+    "audio-metadata": "^0.3.0",
     "body-parser": "~1.14.2",
+    "cors": "^2.8.4",
     "ejs": "~2.4.1",
     "express": "~4.13.1",
     "express-session": "~1.13.0",
-    "howler": "^2.0.7",
+    "ffmetadata": "^1.4.0",
     "mongoose": "^4.13.9",
     "multer": "^1.3.0",
-    "vue-howler": "^0.7.0",
-    "wavesurfer": "^1.3.4",
-    "web-audio-api": "^0.2.2"
+    "wavesurfer": "^1.3.4"
   }
 }

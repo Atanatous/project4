@@ -2,7 +2,6 @@ var express     = require('express');
 var app         = express();
 var mongoose    = require('mongoose');
 var bodyParser  = require('body-parser');
-var session     = require('express-session');
 var fs          = require('fs');
 
 app.set('views', __dirname + '/views');
@@ -16,9 +15,9 @@ db.once('open', function() {
 });
 mongoose.connect('mongodb://localhost/project4');
 
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || 80;
 
-var server  = app.listen(port, function(){
+var server  = app.listen(8080, function(){
   console.log("Listening on ip 143.248.36.229 port 8080...");
 });
 

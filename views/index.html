@@ -39,48 +39,68 @@
       </nav>
     </header>
 
-    <div id="app">
+    <section class="todoapp">
       <div class="todo-list-template">
         <div class="title">
-          뭐하지 헤헤
+          To-Do List
         </div>
-        <div class="form-wrapper">
+
+        <section class="form-wrapper">
           <div class="form">
-            <input value="" onchange="" onkeypress="" />
-            <div class="create-button" onclick="">
+            <input class="new-todo"
+              autofocus autocomplete="off"
+              placeholder="무얼 해야 할까?"
+              v-model="newTodo"
+              @keyup.enter="addTodo">
+            <div class="create-button" @click="addTodo">
               추가
             </div>
           </div>
-        </div>
-        <div class="todos-wrapper">
+        </section>
 
-          <div class="todo-item" onclick="">
-            <div class="remove" onclick="">
-            </div>
-            <div class={`todo-text ${checked && 'checked'}`}>
-              <div> 어렵다 어려워 </div>
-            </div>
-          </div>
+        <section class="todos-wrapper" v-show="todos.length" v-cloak>
+          <input class="toggle-all" type="checkbox" v-model="allDone" />
+          <ul class="todo-list">
+            <li v-for="todo in filteredTodos"
+              class="todo"
+              :key="todo.id"
+              :class="{ completed: todo.completed, editing: todo == editedTodo }" >
+              <div class="view">
+                <input class="toggle" type="checkbox" v-model="todo.completed" />
+                <label @dblclick="editTodo(todo)">{{ todo.title }}</label>
+                <button class="destroy" @click="removeTodo(todo)"></button>
+              </div>
+              <input class="edit" type="text"
+                v-model="todo.title"
+                v-todo-focus="todo == editedTodo"
+                @blur="doneEdit(todo)"
+                @keyup.enter="doneEdit(todo)"
+                @keyup.esc="cancelEdit(todo)">
+              </li>
+          </ul>
+        </section>
 
-          <div class="todo-item" onclick="">
-            <div class="remove" onclick="">
-            </div>
-            <div class={`todo-text ${checked && 'checked'}`}>
-              <div> 으아아아아 </div>
-            </div>
-          </div>
-
-          <div class="todo-item" onclick="">
-            <div class="remove" onclick="">
-            </div>
-            <div class={`todo-text ${checked && 'checked'}`}>
-              <div> 컴포넌트으으으 </div>
-            </div>
-          </div>
-
-        </div>
+        <footer class="footer" v-show="todos.length" v-cloak>
+          <span class="todo-count">
+            <strong> {{ remaining }} </strong> {{ remaining | pluralize }} left
+          </span>
+          <ul class="filters">
+            <li>
+              <a href="#/all" :class="{ selected: visibility == 'all' }"> All </a>
+            </li>
+            <li>
+              <a href="#/active" :class="{ selected: visibility == 'active' }"> Active </a>
+            </li>
+            <li>
+              <a href="#/completed" :class="{ selected: visibility == 'completed' }"> Completed </a>
+            </li>
+          </ul>
+          <button class="clear-completed" @click="removeCompleted" v-show="todos.length > remaining">
+            Clear completed
+          </button>
+        </footer>
       </div>
-    </div>
+    </section>
 
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="components/todo_list.js"></script>
