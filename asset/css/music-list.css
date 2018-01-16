@@ -1,0 +1,86 @@
+ul {
+  list-style: none;
+}
+
+img {
+  width: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.albumApp li {
+  float: left;
+  margin: 10px;
+  width: calc(25% - 20px);
+  background: white;
+  text-align: center;
+}
+
+
+.album-cover {
+  width: 100%;
+  height: 260px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.album-info {
+  padding: 10px;
+}
+
+.album-title {
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.album-data {
+  font-size: 12px;
+}
+
+.interaction-button-wrapper {
+  width:100%;
+  text-align: center;
+}
+
+.interaction-button {
+  display: inline-block;
+  background: white;
+  width: 384px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); /* 그림자 */
+  margin: 0 auto; /* 페이지 중앙 정렬 */
+  margin-top: 2rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.submit-button, .search-button {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-left: 1rem;
+  background: #22b8cf;
+  border-radius: 3px;
+  color: white;
+  font-weight: 600;
+}
+
+.submit-button {
+  cursor: pointer;
+}
+
+.custom-file-upload {
+    margin-left: 10px;
+    width: 240px;
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+input[type="file"] {
+  display: none
+}

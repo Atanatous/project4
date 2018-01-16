@@ -1,0 +1,41 @@
+html {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  outline: 0;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  font-size: 100%;
+  font-family: sans-serif;
+  padding: 0;
+  margin: 0;
+  background: #f9f9f9;
+}
+
+header {
+  text-align: center;
+  font-family: "Helvetica Neue", "Futura", "Trebuchet MS", Arial;
+  background-color: #22b8cf;
+}
+
+.main_title {
+  padding-top:3rem;
+  margin:0;
+  font-size: 35px;
+  font: "Futura";
+  width: 100%;
+  color: white;
+  background-color: #22b8cf;
+}
+
+.sub_title {
+  margin: 0;
+  color: white;
+  padding-bottom: 2rem;
+  font-size: 16px;
+  background-color: #22b8cf;
+}
