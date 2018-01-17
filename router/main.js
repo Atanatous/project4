@@ -1,6 +1,7 @@
 var multer    = require('multer');
 var ffmetadata = require('ffmetadata');
 var Audio = require('../models/audio');
+var ID3 = require('id3-reader');
 
 var storage = multer.diskStorage({
   destination: function(req, file, cb) {
@@ -12,12 +13,30 @@ var storage = multer.diskStorage({
 });
 var upload = multer({ storage: storage });
 
-
 module.exports = function(app, fs)
 {
   app.get('/', function(req, res) {
     res.render('index.html');
   });
+
+  app.get('/login', function(req, res) {
+    res.render('login.html');
+  });
+
+  app.post('/login', function(req, res) {
+    var body = req.body;
+    if ( findUser( body.user_id, body.user_pwd )) {
+      req.session.user_uid = findUserIndex( body.user_id, body.user_pwd );
+      res.redirect('/');
+    } else {
+      res.send("Not Valid");
+    }
+  });
+
+  app.get('/logout', function(req, res) {
+    delete req.session.user_uid;
+    res.redirect('/');
+  })
 
   app.get('/sample', function(req, res) {
     res.render('music-play.html');
@@ -52,6 +71,11 @@ module.exports = function(app, fs)
     var title     = "";
     var artist    = "";
     var lyrics    = "";
+
+    // var metadata = ID3.loadTags(req.file.path, function() {
+    //   var tags = ID3.getAllTags(req.file.path);
+    //   console.log(tags);
+    // });
 
     var metadata  = ffmetadata.read(req.file.path, function(err, data) {
       if (err) {

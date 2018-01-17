@@ -42,14 +42,14 @@
     <div id="album-wrapper">
       <section class="album-info">
           <p>
-            <h1> 제목 </h1>
+            <h1> {{ albums[indexPlaying].title }} </h1>
           </p>
           <p>
-            <h3> 가수 이름 </h3>
+            <h3> {{ albums[indexPlaying].artist }} </h3>
           </p>
       </section>
       <div class="image-wrapper">
-        <img src="/image/lonely.jpg" />
+        <img :src= "albums[indexPlaying].picture" />
       </div>
       <div class="waveform-wrapper">
         <div id="waveform"></div>
@@ -67,7 +67,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/wavesurfer.js/1.4.0/wavesurfer.min.js"></script>
-    <script src="components/music_manager.js"></script>
+    <script src="components/music_play.js"></script>
   </body>
 
 </html>

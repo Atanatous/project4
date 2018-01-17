@@ -1,7 +1,6 @@
 var url = "http://localhost:8080/"
 var server_url = "http://143.248.132.112:80/"
 
-var req = new XMLHttpRequest();
 
 // visibility filters
 var filters = {
@@ -124,6 +123,7 @@ var app = new Vue({
 // mount
 app.$mount('.albumApp')
 
+var req = new XMLHttpRequest();
 // get server data
 req.open('GET', url + "api/music", true);
 req.responseType = 'json';

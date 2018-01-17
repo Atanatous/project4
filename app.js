@@ -5,8 +5,9 @@ var express     = require('express');
 var app         = express();
 var bodyParser  = require('body-parser');
 var mongoose    = require('mongoose');
-var fs = require('fs');
-var cors = require('cors');
+var fs          = require('fs');
+var cors        = require('cors');
+var session     = require('express-session')
 // [ CONFIGURE mongoose ]
 
 app.set('views', __dirname + '/views');
@@ -33,6 +34,12 @@ app.use(bodyParser.urlencoded({ extended: true , limited:'50mb'}));
 app.use(bodyParser.json());
 app.use(cors());
 app.use(bodyParser({limit: '50mb'}));
+app.use(session({
+  secret: "!@#$abcd$#@!",
+  resave: false,
+  saveUninitialized: true
+}));
+
 
 // [CONFIGURE SERVER PORT]
 var port = process.env.PORT || 8080;
@@ -40,6 +47,8 @@ var port = process.env.PORT || 8080;
 // [CONFIGURE ROUTER]
 var router = require('./router/main')(app, fs);
 var router2 = require('./router/index')(app, Info, Song, Playlist);
+
+
 
 // [RUN SERVER]
 var server = app.listen(port, function(){

@@ -45,20 +45,22 @@
           enctype="multipart/form-data"
           action="/audio"
           method="post">
+          <input id="file-upload"
+          type="file"
+          name="audio"
+          class="inputfile"
+          data-multiple-caption="{count} files selected"
+          multiple/>
           <label for="file-upload" class="custom-file-upload">
-            Upload MP3 File
+            <strong>Upload Your Own MP3 File</strong>
           </label>
-            <input id="file-upload" type="file" name="audio" />
             <input class="submit-button" type="submit" value="전송" name="upload" />
         </form>
 
-        <section class="interaction-button"
-          enctype="multipart/form-data"
-          action="/audio"
-          method="post">
-            <input class="custom-file-upload" type="text" />
+        <!-- <section class="interaction-button">
+            <input class="custom-search" type="text" placeholder="~~~장식용이지롱~~~"/>
             <button class="search-button"> 검색 </button>
-        </section>
+        </section> -->
       </section>
 
       <ul class="album-list">
@@ -86,6 +88,33 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/wavesurfer.js/1.4.0/wavesurfer.min.js"></script>
     <script type="text/javascript" src="components/audio-metadata.min.js"></script>
     <script src="components/music_list.js"></script>
+    <script>
+      var inputs = document.querySelectorAll('.inputfile');
+      Array.prototype.forEach.call( inputs, function( input ) {
+        var label = input.nextElementSibling;
+        var labelVal = label.innerHTML;
+
+        input.addEventListener('change', function (e) {
+          var fileName = '';
+          if (this.files && this.files.length > 1){
+            fileName = ( this.getAttribute('data-multiple-caption') || '').replace('{count}', this.files.length);
+            console.log('files,' + fileName);
+          } else {
+            fileName = e.target.value.split('\\').pop();
+            console.log("hi" + fileName)
+          }
+          if (fileName) {
+            console.log(fileName);
+            label.innerHTML = fileName;
+            console.log('files,' + fileName);
+          }
+          else {
+            label.innerHTML = labelVal;
+            console.log("labelVal" + labelVal)
+          }
+        });
+      });
+    </script>
   </body>
 
 </html>
