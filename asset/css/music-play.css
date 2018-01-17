@@ -14,8 +14,9 @@
 
 .image-wrapper img {
   border-radius: 50%;
-  width: 80%;
-  margin-left: 2rem;
+  width: 350px;
+  height: 350px;
+  margin-right: 2rem;
   box-shadow: 5px 5px 5px black;
 }
 

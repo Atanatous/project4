@@ -1,7 +1,7 @@
 var multer    = require('multer');
 var ffmetadata = require('ffmetadata');
 var Audio = require('../models/audio');
-var ID3 = require('id3-reader');
+var jsmediatags = require('jsmediatags');
 
 var storage = multer.diskStorage({
   destination: function(req, file, cb) {
@@ -19,26 +19,11 @@ module.exports = function(app, fs)
     res.render('index.html');
   });
 
-  app.get('/login', function(req, res) {
-    res.render('login.html');
+  app.get('/sample/', function(req, res) {
+    res.render('music-play.html');
   });
 
-  app.post('/login', function(req, res) {
-    var body = req.body;
-    if ( findUser( body.user_id, body.user_pwd )) {
-      req.session.user_uid = findUserIndex( body.user_id, body.user_pwd );
-      res.redirect('/');
-    } else {
-      res.send("Not Valid");
-    }
-  });
-
-  app.get('/logout', function(req, res) {
-    delete req.session.user_uid;
-    res.redirect('/');
-  })
-
-  app.get('/sample', function(req, res) {
+  app.get('/sample/:i', function(req, res) {
     res.render('music-play.html');
   });
 
@@ -66,34 +51,45 @@ module.exports = function(app, fs)
       res.send("There is no Upload File");
     }
     var filename  = req.file.filename;
-    var mimetype  = req.file.mimetype;
-    var size      = req.file.size;
     var title     = "";
     var artist    = "";
-    var lyrics    = "";
+    var picture   = "";
 
-    // var metadata = ID3.loadTags(req.file.path, function() {
-    //   var tags = ID3.getAllTags(req.file.path);
-    //   console.log(tags);
-    // });
+    new jsmediatags.Reader(req.file.path)
+    .setTagsToRead(["title", "artist", "picture"])
+    .read({
+      onSuccess: function(tag) {
+        title = tag.tags.title;
+        artist = tag.tags.artist;
+        picture = tag.tags.picture;
 
-    var metadata  = ffmetadata.read(req.file.path, function(err, data) {
-      if (err) {
-        console.error("Error reading metadata", err);
-      } else {
-        console.log(data);
-        title = data.title;
-        artist = data.artist;
-        lyrics = data.lyrics;
+        if (picture) {
+          console.log("hi")
+          var base64String = "";
+          for (var i = 0; i < picture.data.length; i++) {
+            base64String += String.fromCharCode(picture.data[i]);
+          }
+          Audio.findOneAndUpdate(
+            { "title": title, "artist": artist },
+            { "filename": filename, "title": title, "artist": artist, "picture": base64String, "format": picture.format},
+            { upsert: true },
+            (err) => { if (err) { console.error(err); res.json({ result: 0}); return; }});
 
-        Audio.findOneAndUpdate(
-          { "filename": filename, "artist": artist },
-          { "filename": filename, "title": title, "mimetype": mimetype, "lyrics": lyrics, "size": size},
-          { upsert: true },
-          (err) => { if (err) { console.error(err); res.json({ result: 0}); return; }});
+          res.redirect("/music");
+        }
+        else {
+          console.log("HI");
+          Audio.findOneAndUpdate(
+            { "title": title, "artist": artist },
+            { "filename": filename, "title": title, "artist": artist, "picture": "", "format": ""},
+            { upsert: true },
+            (err) => { if (err) { console.error(err); res.json({ result: 0}); return; }});
+
+          res.redirect("/music");
+      }},
+      onError: function(error) {
+        console.log(':()', error.type, error.info);
       }
-
-      res.redirect("/music");
     });
   });
 }

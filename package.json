@@ -10,7 +10,7 @@
     "express": "~4.13.1",
     "express-session": "^1.13.0",
     "ffmetadata": "^1.4.0",
-    "id3-reader": "0.0.2",
+    "jsmediatags": "^3.8.1",
     "mongoose": "^4.13.9",
     "multer": "^1.3.0",
     "wavesurfer": "^1.3.4"

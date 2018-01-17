@@ -107,7 +107,8 @@ var app = new Vue({
       app.albums = req.response;
       app.albums.forEach(function (album, index) {
         album.id = index;
-        album.picture = url + "image/" + album.title + ".jpg";
+        album.picture = "data:" + album.format + ";base64," + window.btoa(album.picture);
+        // album.picture = url + "image/" + album.title + ".jpg";
       })
       app.initWaveSurf();
       app.addWaveSurfListeners();

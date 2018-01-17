@@ -6,9 +6,8 @@ var audioSchema = new Schema({
   filename: String,
   title: String,
   artist: String,
-  lyrics: String,
-  mimetype: String,
-  size: Number
+  picture: String,
+  format: String
 });
 
 // Export Mongoose model
