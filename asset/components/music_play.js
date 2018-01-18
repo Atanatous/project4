@@ -1,5 +1,4 @@
-var url = "http://localhost:8080/"
-var server_url = "http://143.248.132.112:80/"
+var url = "http://143.248.36.229:8080/"
 
 var app = new Vue({
   el: "#album-wrapper",
@@ -21,14 +20,13 @@ var app = new Vue({
     initWaveSurf: function(self) {
       this.wavesurfer = WaveSurfer.create({
         container: '#waveform',
-        barWidth: 1,
+        barWidth: 2,
         waveColor: '#3bc9db',
         progressColor: '#15aabf',
-        scrollParent: true,
-        autoCenter: false,
-        hideScrollbar: false
+        skipLength: 15
       });
-      this.wavesurfer.load('audio/' + this.albums[0].filename)
+      this.indexPlaying = parseInt(window.location.href.split('/').pop());
+      this.wavesurfer.load('/audio/' + this.albums[this.indexPlaying].filename);
     },
     addWaveSurfListeners: function() {
       var self = this;
@@ -79,22 +77,28 @@ var app = new Vue({
     stop: function() {
       this.wavesurfer.stop();
     },
+    skipBackward: function() {
+      this.wavesurfer.skipBackward();
+    },
+    skipForward: function() {
+      this.wavesurfer.skipForward();
+    },
     playNext: function() {
       if (this.indexPlaying < this.albums.length - 1) {
         this.indexPlaying += 1;
-        this.wavesurfer.load("audio/" + this.albums[this.indexPlaying].filename);
+        this.wavesurfer.load("/audio/" + this.albums[this.indexPlaying].filename);
       } else {
         this.indexPlaying = 0;
-        this.wavesurfer.load("audio/" + this.albums[0].filename);
+        this.wavesurfer.load("/audio/" + this.albums[0].filename);
       }
     },
     playPrev: function() {
       if (this.indexPlaying > 0) {
         this.indexPlaying -= 1;
-        this.wavesurfer.load("audio/" + this.albums[this.indexPlaying].filename);
+        this.wavesurfer.load("/audio/" + this.albums[this.indexPlaying].filename);
       } else {
         this.indexPlaying = 0;
-        this.wavesurfer.load("audio/" + this.albums[0].filename);
+        this.wavesurfer.load("/audio/" + this.albums[0].filename);
       }
     }
   },
@@ -107,9 +111,11 @@ var app = new Vue({
       app.albums = req.response;
       app.albums.forEach(function (album, index) {
         album.id = index;
-        album.picture = "data:" + album.format + ";base64," + window.btoa(album.picture);
-        // album.picture = url + "image/" + album.title + ".jpg";
-      })
+        if (album.picture)
+          album.picture = "data:" + album.format + ";base64," + window.btoa(album.picture);
+        else
+          album.picture = "/image/default.png";
+      });
       app.initWaveSurf();
       app.addWaveSurfListeners();
     }

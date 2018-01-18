@@ -11,14 +11,17 @@ a {
   color: black;
 }
 
-
-
 .albumApp li {
   float: left;
   margin: 10px;
   width: calc(25% - 20px);
   background: white;
   text-align: center;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+.albumApp li:hover {
+  background-color: #c5f6fa;
 }
 
 
@@ -49,6 +52,7 @@ a {
 .interaction-button-wrapper {
   width:100%;
   text-align: center;
+  background-color: #f9f9f9;
 }
 
 .interaction-button {
@@ -68,7 +72,7 @@ a {
   padding-left: 1rem;
   padding-right: 1rem;
   margin-left: 1rem;
-  background: #22b8cf;
+  background: #3bc9db;
   border-radius: 3px;
   color: white;
   font-weight: 600;

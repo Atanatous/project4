@@ -1,0 +1,21 @@
+.Welcome {
+  display: flex;
+  height: 60%;
+  align-items: center;
+  justify-content: center;
+}
+
+.welcome-message {
+  margin: 3rem;
+  font-size: 18px;
+}
+
+.welcome-image img {
+  width: 400px;
+  height: 280px;
+}
+
+#welcome {
+  text-align: center;
+  font-size: 26px;
+}

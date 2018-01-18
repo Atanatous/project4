@@ -6,25 +6,22 @@
     <title>Hard Project</title>
     <link rel="stylesheet" type="text/css" href="css/styles.css" />
     <link rel="stylesheet" type="text/css" href="css/menu.css" />
-    <link rel="stylesheet" type="text/css" href="css/TodoListTemplate.css" />
+    <link rel="stylesheet" type="text/css" href="css/home.css" />
   </head>
 
   <body>
     <header>
       <p class="main_title">
-        YEAAAHH
+        <a href="/">YEAAAHH</a>
       </p>
       <p class="sub_title">
         Fun with your music
       </p>
       <nav id="topMenu">
         <ul>
-          <li class="topMenuLi">
-            <a class="menuLink" href="/"> Home </a>
-          </li>
           <li>|</li>
           <li class="topMenuLi">
-            <a class="menuLink" href="/sample"> Sample </a>
+            <a class="menuLink" href="/checklist"> Checklist </a>
           </li>
           <li>|</li>
           <li class="topMenuLi">
@@ -39,67 +36,34 @@
       </nav>
     </header>
 
-    <section class="todoapp">
-      <div class="todo-list-template">
-        <div class="title">
-          To-Do List
-        </div>
+    <section class="Welcome">
 
-        <section class="form-wrapper">
-          <div class="form">
-            <input class="new-todo"
-              autofocus autocomplete="off"
-              placeholder="무얼 해야 할까?"
-              v-model="newTodo"
-              @keyup.enter="addTodo">
-            <div class="create-button" @click="addTodo">
-              추가
-            </div>
-          </div>
-        </section>
+      <section class="welcome-image">
+        <img src="/image/cong_2.png" />
+      </section>
 
-        <section class="todos-wrapper" v-show="todos.length" v-cloak>
-          <input class="toggle-all" type="checkbox" v-model="allDone" />
-          <ul class="todo-list">
-            <li v-for="todo in filteredTodos"
-              class="todo"
-              :key="todo.id"
-              :class="{ completed: todo.completed, editing: todo == editedTodo }" >
-              <div class="view">
-                <input class="toggle" type="checkbox" v-model="todo.completed" />
-                <label @dblclick="editTodo(todo)">{{ todo.title }}</label>
-                <button class="destroy" @click="removeTodo(todo)"></button>
-              </div>
-              <input class="edit" type="text"
-                v-model="todo.title"
-                v-todo-focus="todo == editedTodo"
-                @blur="doneEdit(todo)"
-                @keyup.enter="doneEdit(todo)"
-                @keyup.esc="cancelEdit(todo)">
-              </li>
-          </ul>
-        </section>
+      <section class="welcome-message">
+        <h1 id="welcome">
+          수요일 새벽이다!
+        </h1>
+        <h1>
+          시작은 Audio Edit Web 이라는 큰 꿈을 가지고 시작했으나, <br />
+          미약한 연습용 웹으로 끝마치고 말았습니다.. <br /> <br/>
 
-        <footer class="footer" v-show="todos.length" v-cloak>
-          <span class="todo-count">
-            <strong> {{ remaining }} </strong> {{ remaining | pluralize }} left
-          </span>
-          <ul class="filters">
-            <li>
-              <a href="#/all" :class="{ selected: visibility == 'all' }"> All </a>
-            </li>
-            <li>
-              <a href="#/active" :class="{ selected: visibility == 'active' }"> Active </a>
-            </li>
-            <li>
-              <a href="#/completed" :class="{ selected: visibility == 'completed' }"> Completed </a>
-            </li>
-          </ul>
-          <button class="clear-completed" @click="removeCompleted" v-show="todos.length > remaining">
-            Clear completed
-          </button>
-        </footer>
-      </div>
+          시작 화면을 마지막 날에 만드는 그런 이상한 순서를 취하다가, <br />
+          디자인 능력이 저 바닥을 기는 수준이라는 걸 깨달음 ㅜㅜㅜㅜ<br />
+          나중에 디자인 학원이라도 다니든가 해야지 ㅁㄴㅇㄹ <br /><br />
+
+          아무튼 그런고로 시작 화면은 단순한 글들로 채워봅니다. <br />
+          아무튼 어찌어찌 끝났으니 이제 난 모르겠다아아아아아 <br /><br />
+
+          헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤헤 <br />
+        </h1>
+      </section>
+
+      <section class="welcome-image">
+        <img src="/image/cong_1.png" />
+      </section>
     </section>
 
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>

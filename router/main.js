@@ -18,6 +18,10 @@ module.exports = function(app, fs)
   app.get('/', function(req, res) {
     res.render('index.html');
   });
+  
+  app.get('/checklist', function(req, res) {
+    res.render('checklist.html');
+  });
 
   app.get('/sample/', function(req, res) {
     res.render('music-play.html');

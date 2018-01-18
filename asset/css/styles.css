@@ -13,13 +13,18 @@ body {
   font-family: sans-serif;
   padding: 0;
   margin: 0;
-  background: #e9e9e9;
+  background: #f9f9f9;
+}
+
+header a {
+  text-decoration: none;
+  color: white;
 }
 
 header {
   text-align: center;
   font-family: "Helvetica Neue", "Futura", "Trebuchet MS", Arial;
-  background-color: #22b8cf;
+  background-color: #3bc9db;
 }
 
 .main_title {
@@ -29,7 +34,7 @@ header {
   font: "Futura";
   width: 100%;
   color: white;
-  background-color: #22b8cf;
+  background-color: #3bc9db;
 }
 
 .sub_title {
@@ -37,5 +42,5 @@ header {
   color: white;
   padding-bottom: 2rem;
   font-size: 16px;
-  background-color: #22b8cf;
+  background-color: #3bc9db;
 }
